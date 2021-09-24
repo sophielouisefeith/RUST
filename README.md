@@ -13,9 +13,23 @@ The term is somewhat vague. In principle, any language can be implemented with a
 **Comparison of multi-paradigm programming languages**
 
 
+• rust needs to know for stack alocated things ow much room it will take up.
+• rust always needs to know a value of a given type. value should always be the same size in memory.
+• box size is a heap allocted own pointer. 
 
 
+### BOX
+A pointer type for heap allocation. 
 
+- `Box<T>` 
+
+casually referred to as a 'box', provides the simplest form of heap allocation in Rust. Boxes provide ownership for this allocation, and drop their contents when they go out of scope.
+
+
+freeing?
+box is an owned pointer it ownes a value that it points to,
+things are dropped(freed) when they go out of scope.
+at the end of the scope of the own variable it gets dropped 
 
 ## **Resources**
 
@@ -50,14 +64,20 @@ fn main(){
 ---
  
 
+
 ## SINGLE LINKED LIST
 
 Why use a linked list:
 
+what does a linked list:
 
-- `cargo new linked-list`
+- `cargo new linked-list --lib`
 - `cd linked-list`
 
 
+the way that a linked list works, you take the head of a linked list.
+you construct a new node.and you make the former head of a linked list 
+the next link in that node.
+HEAD-> new head to be another node pointing to the 
 
 
