@@ -1,11 +1,15 @@
 
-//*********************  EXAMPLE with enum or use std RESULT  *****************************//
+//*********************  EXAMPLE with enum or use std RESULT  & OPTION  *****************************//
+//********************* OK is also port of std remove RESULT *****************************//
+//*********************  USE OPTION *****************************//
 
-
-
-//*********************  un command to use std *****************************//
-//*********************  WHEN WE USE STD RESULT::ERR *****************************//
 #![allow(non_snake_case)] // included this after an error. 
+
+
+pub enum Option<T>{
+    Some(T),
+    None,
+}
 
 fn main() {
 
@@ -23,25 +27,52 @@ fn main() {
     println!("c = {:?}", c);
 
     //or instead of match we use if let statement , BUT if you want to handle more cases then use match
-
     // so we say if thing(v)-> v == t a generic type...   we put c in v  then we print the value of v if not an error
-
-    if let Result::Ok(v) = c {
+    if let Ok(v) = c {
         println!("val = {}",v);
-    }
-
-   
+    }   
 }
 
 fn divide(a:i32, b:i32)->Result<i32, String> { 
     if b == 0{
-        return Result::Err("Cannot Divide by zero".to_string());
+        return Err("Cannot Divide by zero".to_string());
     }
-    Result::Ok(a /b)
+    Ok(a /b)
 } 
 
 
+//*********************  un command to use std *****************************//
+//*********************  WHEN WE USE STD RESULT::ERR *****************************//
+// #![allow(non_snake_case)] // included this after an error. 
 
+// fn main() {
+
+//     // let's call the function divide 
+//     let a = divide(4, 5); // this will be a thing 
+//     let b = divide (10,0 ); // thist will be an error 
+//     let c = divide (10, 5); // thist will be an error 
+
+//     // can you use result with match
+//     // match c {
+//     //     Result::Thing(v) => println! ("val ={}", v),
+//     //     _ => {}
+//     // }
+//     println!("a = {:?}, b = {:?}", a, b);
+//     println!("c = {:?}", c);
+
+//     //or instead of match we use if let statement , BUT if you want to handle more cases then use match
+//     // so we say if thing(v)-> v == t a generic type...   we put c in v  then we print the value of v if not an error
+//     if let Result::Ok(v) = c {
+//         println!("val = {}",v);
+//     }   
+// }
+
+// fn divide(a:i32, b:i32)->Result<i32, String> { 
+//     if b == 0{
+//         return Result::Err("Cannot Divide by zero".to_string());
+//     }
+//     Result::Ok(a /b)
+// } 
 
 //*********************  un command to use enum *****************************//
 //*********************  WHEN WE USE ENUM  *****************************//
