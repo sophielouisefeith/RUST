@@ -1,3 +1,7 @@
+# How to learn rust?
+
+
+
 # Learning rust 
 
 “Rust is a systems programming language focused on three goals: safety, speed, and concurrency.”
@@ -18,6 +22,53 @@ The term is somewhat vague. In principle, any language can be implemented with a
 • box size is a heap allocted own pointer. 
 
 
+## **Resources**
+
+1. https://people.eecs.berkeley.edu/~apanda/assets/papers/hotos2017-rust.pdf
+2. https://learning-rust.github.io/docs/a3.hello_world.html
+3. https://towardsdatascience.com/you-want-to-learn-rust-but-you-dont-know-where-to-start-fc826402d5ba#6919
+4. https://rust-unofficial.github.io/too-many-lists/first.html
+https://www.youtube.com/watch?v=IiDHTIsmUi4
+5. Udemy:https://www.udemy.com/course/hands-on-data-structures-and-algorithms-in-rust/learn/lecture/20110448#overview
+6. https://www.youtube.com/watch?v=IiDHTIsmUi4
+7. https://docs.rs/petgraph/0.6.0/petgraph/
+
+
+
+### NOTES from [udemy course](https://www.udemy.com/course/hands-on-data-structures-and-algorithms-in-rust/learn/lecture/20110450#overview) Hands-On data Structures and Algorithms in Rust 
+
+
+
+##### 
+Install rust and running a simple program
+-----------------
+step 1 create a new file
+- `cargo new ` 
+step 2 
+- `cargo run` 
+
+Structures and Enums in Rust
+------------------------------------
+new handled information:
+
+impl:
+
+Format:
+
+derive debug:
+- `#[derive(Debug)] `
+- `{:?}`
+
+Enum:
+Enum is an enumurated type 
+
+
+
+
+
+
+
+
 ### BOX
 A pointer type for heap allocation. 
 
@@ -31,13 +82,7 @@ box is an owned pointer it ownes a value that it points to,
 things are dropped(freed) when they go out of scope.
 at the end of the scope of the own variable it gets dropped 
 
-## **Resources**
 
-1. https://people.eecs.berkeley.edu/~apanda/assets/papers/hotos2017-rust.pdf
-2. https://learning-rust.github.io/docs/a3.hello_world.html
-3. https://towardsdatascience.com/you-want-to-learn-rust-but-you-dont-know-where-to-start-fc826402d5ba#6919
-4. https://rust-unofficial.github.io/too-many-lists/first.html
-https://www.youtube.com/watch?v=IiDHTIsmUi4
 
 
 ## **Instalation**
