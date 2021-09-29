@@ -26,8 +26,28 @@ impl<T>LL<T>{
         self.0 = Some((data, Box::new(LL(t))));
     }
 
+    // let's add something to the back// there is not really a back yet this means we have to recurse it. 
+
+    pub fn push_back(&mut self, data:T){
+        match self.0{
+            Some((_, ref mut child)) => child.push_back(data),
+            None => self.push_front(data),
+        }
+
+    }
+
 }
 
 fn main() {
+
+    /* create a new LL*/
+    let mut ll = LL::new();
+    ll.push_front(3);
+    ll.push_back(12);
+    ll.push_front(1);
+    /* each one contains the next */
+
+
+    println!("ll = {:?}", ll );
     println!("Hello, world!");
 }
