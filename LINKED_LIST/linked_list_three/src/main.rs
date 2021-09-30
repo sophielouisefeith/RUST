@@ -1,6 +1,5 @@
 
-//stack does not know how big.
-//heap needs to know how big 
+
 
 // 
 enum LL {
@@ -12,7 +11,7 @@ enum LL {
 
 fn main() {
 
-    
+
 
 
 
