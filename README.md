@@ -21,10 +21,18 @@ or linked list.
 using [match](https://doc.rust-lang.org/std/keyword.match.html)
 
 
+OWN MADE QUIZE AND EXCERCISES
+----------------------------------------
+- Match is MUCH more powerful than switch ? why
+write an example.
+
+
+
 
 Doubly Linked list
 -------------------
 - using [weak](https://doc.rust-lang.org/std/rc/struct.Weak.html#method.upgrade)
+
 
 
 Binary tree 
@@ -35,8 +43,9 @@ https://levelup.gitconnected.com/rust-binary-tree-30efdd355b60
 
 
 
-
-
+LIST:
+------------
+Slices 
 
 
 # Learning rust 
@@ -69,7 +78,7 @@ https://www.youtube.com/watch?v=IiDHTIsmUi4
 5. Udemy:https://www.udemy.com/course/hands-on-data-structures-and-algorithms-in-rust/learn/lecture/20110448#overview
 6. https://www.youtube.com/watch?v=IiDHTIsmUi4
 7. https://docs.rs/petgraph/0.6.0/petgraph/
-
+8.https://github.com/ProgrammingRust/examples
 
 
 ### NOTES from [udemy course](https://www.udemy.com/course/hands-on-data-structures-and-algorithms-in-rust/learn/lecture/20110450#overview) Hands-On data Structures and Algorithms in Rust 
