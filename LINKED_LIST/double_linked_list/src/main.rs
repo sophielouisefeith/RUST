@@ -16,6 +16,12 @@ allocation (often referred to as “inner value”) is also dropped. */
 • RefCell hides the multibility 
 • Immutable outside, but can mutate interior
 • A mutable memory location with dynamically checked borrow rules*/
+
+
+// why are the tools are not ideal ->  keep t
+//keepin
+
+
 use std::cell::RefCell;
 
 /* weak reference ????*/
@@ -83,19 +89,31 @@ impl<T> DbList<T>{
         /* Take the first value to check if it has something in it*/
         match self.last.take(){
             /* if it has the value we need to put the value in front of it*/
-            Some(r)=> {
+            Some(value)=> {
                 /* create a new back object */
                 let new_back = Rc::new(RefCell::new(DbNode {
                     data,
-                    prev:Some(r.clone()), /* we need clone because of the refers. */
+                    prev:Some(value.clone()), /* we need clone because of the refers ? this has to do with rc
+                    try to understand this better for yourself. */
                     next:None,
                 }));
                 /* tell the last object this is now behind it
                 upgrade the weak reference r */
-                let st = Weak::upgrade(&r).unwrap();
+                //let st = Weak::upgrade(&value).unwrap(); //Constructs a new Weak<T>, without allocating any memory. Calling upgrade on the return value always gives None.
+                let st = match Weak::upgrade(&value){
+                    None => return,
+                    Some(value) => value
+                        //match on option// 
+                        
+                    
+                };
+                    //unwrap -> pannic 
+
                 /* could we also write this like ?*/
-                //let st = Weak::upgrade(&r)?;
-                // no not ness because its an option so i returns none if it doesnt work not ness an error?
+               // let st = Weak::upgrade(&r)?;
+                // no not ness because its an option so i returns NONE 
+                //if it doesnt work  it's not ness an error?
+                
                 let mut m = st.borrow_mut();
                 /* downgrade fromt strong to weak*/
                 self.last = Some(Rc::downgrade(&new_back));
@@ -117,7 +135,6 @@ impl<T> DbList<T>{
         }
     }
 }
-
 
 
 

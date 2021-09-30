@@ -38,6 +38,15 @@ impl<T>LL<T>{
 
 }
 
+
+
+//use std::cmp::PartialOrd;
+
+// impl <T:PartialOrd> LL <T>{
+
+
+// }
+
 fn main() {
 
     /* create a new LL*/
@@ -46,6 +55,10 @@ fn main() {
     ll.push_back(12);
     ll.push_front(1);
     /* each one contains the next */
+
+    // challenge : insert sorted.
+    // find the place needs to go and call push front
+
 
 
     println!("ll = {:?}", ll );
