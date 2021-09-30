@@ -22,6 +22,11 @@ using [match](https://doc.rust-lang.org/std/keyword.match.html)
 
 
 
+Doubly Linked list
+-------------------
+- using [weak](https://doc.rust-lang.org/std/rc/struct.Weak.html#method.upgrade)
+
+
 Binary tree 
 -----------------
 
