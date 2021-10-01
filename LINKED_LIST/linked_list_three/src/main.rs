@@ -1,7 +1,4 @@
-//reminder repeat / need to know by heart. 
-//https://stackoverflow.com/questions/79923/what-and-where-are-the-stack-and-heap
-//stack does needs to know size
-//heap doesnt 
+
 
 // 
 #[derive(Debug)]
@@ -35,8 +32,7 @@ impl LL{
 fn main() {
 
     // we need to make it mutable ( changable)
-   // let mut ll =  LL::create(4);    // take a follow of 4 // single node contains 4 
-
+    // let mut ll =  LL::create(4);    // take a follow of 4 // single node contains 4 
     // println!("{:?}", ll);
     // println!("{:?}", LL::Last);
 
@@ -49,9 +45,6 @@ fn main() {
 
     //     Last => {} // Last is a node wont be reached
     // }
-
-
-
     //println!("{:?}", ll);
 
 
