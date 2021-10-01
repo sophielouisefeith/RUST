@@ -20,24 +20,48 @@ impl LL{
         Node(elem, Box::new(Last) ) //  first elem and second is the box which we point to the last which is the second...  Last-> heap 
         // we put NO ; so it returns back to  in this case (main)
     }
+
+    //self- linkedlist
+    fn addNode(&mut self, elem: i32 ){
+        // run the match operator on the self.
+        match self{
+            Node(a, b) => { b.addNode(elem);}    //need to check if the self is the first node not the last , recursive call
+            Last => {*self = LL::create(elem);} //replace the last witit // take the self which is a mutable reference so  we need to dereference it 
+        }
+
+    }
 }
 
 fn main() {
 
     // we need to make it mutable ( changable)
-    let mut ll =  LL::create(4);    // take a follow of 4 // single node contains 4 
+   // let mut ll =  LL::create(4);    // take a follow of 4 // single node contains 4 
 
-    println!("{:?}", ll);
-    println!("{:?}", LL::Last);
+    // println!("{:?}", ll);
+    // println!("{:?}", LL::Last);
 
     // create a second node and add it to the list 
     // using match
-    match &mut ll{
-        //mut b cause it dereference 
-        Node(a, b) => { **b = LL::create(5); }   // a = elem, b = box to ll // create a linked list // from create who returns a node  we want to replace the b second element with the current node 
-        // b is LAST we only have 1 node 
+    // match &mut ll{
+    //     //mut b cause it dereference 
+    //     Node(a, b) => { **b = LL::create(5); }   // a = elem, b = box to ll // create a linked list // from create who returns a node  we want to replace the b second element with the current node 
+    //     // b is LAST we only have 1 node 
 
-        Last => {} // Last is a node wont be reached
-    }
+    //     Last => {} // Last is a node wont be reached
+    // }
+
+
+
+    //println!("{:?}", ll);
+
+
+    let mut ll = LL::create(4);
+    ll.addNode(3);
+    ll.addNode(4);
+    ll.addNode(5);
+    ll.addNode(6);
+
     println!("{:?}", ll);
+
 }
+
