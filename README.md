@@ -1,6 +1,6 @@
 # How to learn rust?
 
-# No tutorials
+##### No tutorials .....
 
 Follow:
 
@@ -25,6 +25,18 @@ OWN MADE QUIZE AND EXCERCISES
 ----------------------------------------
 - Match is MUCH more powerful than switch ? why
 write an example.
+
+
+## good resources for linked list
+- https://rust-unofficial.github.io/too-many-lists/second.html
+- https://medium.com/swlh/implementing-a-linked-list-in-rust-c25e460c3676
+LINKED LIST:
+
+
+-  Challenge : insert sorted.
+    find the place needs to go and call push front
+- Write pop front and pop back (doubly linked list)
+- doubly linked list why is usin rc = reference count unconvient in some cases. 
 
 
 
