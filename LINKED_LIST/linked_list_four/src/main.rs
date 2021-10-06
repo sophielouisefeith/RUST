@@ -79,7 +79,7 @@ return Some(elem)
 closure:
  */ 
   // method take 
-   //  map == match option { None => None, Some(x) => Some(y) } ?
+   //  map == match option { None => None, Some(x) => Some(y) } ? // find out closure. 
    //  the self needs to be mutable.   
     pub fn pop(&mut self) -> Option<T> {
         self.head.take().map(|node|         // list take the head and compare with the node 
@@ -104,41 +104,74 @@ closure:
      * to reference data other than the data it’s intended to reference.
      */
 
-     /** 
-      * how to get to the next item for the iterator 
-      * if there is no next item then return s in your implemention of iter 
-      */
-
+   
 }
 
+
 /**
- * MAKE AN ITTERATOR, oke we would like to implement an iterator
+ ** 
+* how to get to the next item for the iterator 
+* if there is no next item then return s in your implemention of iter 
+ * https://doc.rust-lang.org/std/iter/#implementing-iterator
  * 
+ * MAKE AN ITTERATOR, oke we would like to implement an iterator
+ * a struct to hold the iterators state - 
+ * implementing Iterator for that struct 
+ * hold a pointer to the current node 
  */
 
+pub struct Iter<'a ,T> {
+    next: Option<&'a Node<T>>,
+}
 
+impl<T>List<T>{
+    pub fn iter<'a>(&'a self) -> Iter<'a, T>{
+        Iter{next: self.head.map(|node| &*node) } // * dereference the box // we move the box into map -> here it get's dropped -> 
+    }
+}
 
+impl<'a, T> Iterator for Iter<'a, T>{
+    type Item = &'a T;
+    
+    fn next(&mut self )-> Option<Self::Item>{
+        self.next.map(|node|{
+            self.next = node.next.map(|node| &*node );
+            &node.elem
+        })
+    }
+}
 
 #[cfg(test)]
 mod test {
     use super::List;
+   
 
-    #[test]
-    fn basics() {
-        let mut list = List::new();
+    // #[test]
+    // fn basics() {
+    //     let mut list = List::new();
 
        
-        // Check empty list behaves right
-        // print the map
-        assert_eq!(list.pop(), None);
+    //     // Check empty list behaves right
+    //     // print the map
+    //     assert_eq!(list.pop(), None);
 
-        // Populate list
-        list.push(1);
-        list.push(2);
-        list.push(3);
+    //     // Populate list
+    //     list.push(1);
+    //     list.push(2);
+    //     list.push(3);
         
-       //assert_eq!(list.pop(), Some(2));
+    //    //assert_eq!(list.pop(), Some(2));
+
+    // }
+    #[test]
+    fn iterator() {
+       
+
+       assert_eq!(counter.next(), Some(1));
+       assert_eq!(counter.next(), Some(2));
     }
+  
+
 }
 
 
@@ -156,7 +189,10 @@ fn main() {
     list.push(2);
 
     
-   
+    // let mut counter = Counter::new();
+
+    // assert_eq!(counter.next(), Some(1));
+    // assert_eq!(counter.next(), Some(2));
   
     println!("{:?}", list);
   
