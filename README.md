@@ -7,14 +7,57 @@ Follow:
 https://doc.rust-lang.org/rust-by-example/index.html
 
 
+https://doc.rust-lang.org/book/title-page.html
+
+https://medium.com/@rabin_gaire/memory-management-rust-cf65c8465570
+
+https://medium.com/nearprotocol/rust-parallelism-for-non-c-c-developers-ec23f48b7e56
+
+https://betterprogramming.pub/explaining-rusts-modules-420d38eed6c5
+
+https://rcoh.me/posts/rust-linked-list-basically-impossible/
+
 We just simply start with excercises. 
 
-
-
+- linkedlist
 list of elements each pointing to the next 
 changing the pointer on the current element setting it on the next element.
 usefull for stack object. 
 or linked list.
+- https://github.com/sophielouisefeith/rustlings
+- https://tomassedovic.github.io/roguelike-tutorial/
+
+
+
+
+TO FIGURE OUT
+
+- [ ] traits
+
+*A trait is a collection of methods.
+- [ ] Iterator trait
+- [ ] Map instead of match 
+- [ ] closure
+- [ ] References and Borrowing 
+    - [ ] Ownership
+    - [ ] Lifetime 
+
+
+
+
+### Iterator trait
+
+
+
+
+
+
+
+## lifetimes ()
+" a lifetime is the name of a region (~block/scope) of code somewhere in a program. That's it. When a reference is tagged with a lifetime, we're saying that it has to be valid for that entire region.
+"
+
+https://medium.com/nearprotocol/understanding-rust-lifetimes-e813bcd405fa
 
 
 - to add something to the back
