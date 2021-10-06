@@ -6,17 +6,28 @@ Follow:
 
 https://doc.rust-lang.org/rust-by-example/index.html
 
+
+https://doc.rust-lang.org/book/title-page.html
+
+https://medium.com/@rabin_gaire/memory-management-rust-cf65c8465570
+
 https://medium.com/nearprotocol/rust-parallelism-for-non-c-c-developers-ec23f48b7e56
+
+https://betterprogramming.pub/explaining-rusts-modules-420d38eed6c5
+
+https://rcoh.me/posts/rust-linked-list-basically-impossible/
 
 We just simply start with excercises. 
 
 - linkedlist
-
-
 list of elements each pointing to the next 
 changing the pointer on the current element setting it on the next element.
 usefull for stack object. 
 or linked list.
+- https://github.com/sophielouisefeith/rustlings
+- https://tomassedovic.github.io/roguelike-tutorial/
+
+
 
 
 TO FIGURE OUT
