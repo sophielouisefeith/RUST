@@ -75,7 +75,7 @@ pub fn new_list()-> Self{
                 elem: elem,
             // now the head is still empty
             // to fill it we want to fill the next
-                next: self.head.take(), // take takes the value of head it and put heads on none. this points always to the next value.
+               next: self.head.take(), // take takes the value of head it and put heads on none. this points always to the next value.
         });
         // now we need to fill the head with the elem we received 
         self.head = Some(new_node);    
@@ -109,10 +109,10 @@ pub fn Push_back(&mut self, elem:T){
     // but what happend with node 2
     //self.next = Some(new_node);
     
-    match self.None{
-
-
-    }
+    // match self.tail{
+    //     Some((Node, ref mut child)) => child.push_back(elem),
+    //     None => self.Push_front(elem),
+    // }
 
 }
 
