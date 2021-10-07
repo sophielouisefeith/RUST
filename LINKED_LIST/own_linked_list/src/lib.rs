@@ -1,30 +1,13 @@
-/** own linked list/ through the linked list i hoped to learn the basics of rust parallel on making this linked list
- * i've been practising with small excersises and reading the rust book.
- * made with having the book 
- * 
- * this linked list will do the following 
- * struct -> option box
- * Push
- * 
- * Pop
- * 
- * peek
- * 
- * itterate 
- * 
- * We use : map, take, lifetimes, 
- */
-
 
 
 /** a struct list / generic type
- * the head : will be filled with link of a generic type 
+ * the head : wiLinkedList be fiLinkedListed with link of a generic type 
  */
 
-pub struct LL<T> {
+pub struct LinkedList<T> {
     head: Link<T>,
     tail: Link<T>,
-    count : i32,
+    count : i32, // counts the nodes/ 
     //tail: Link<T>, i think we dont need it since the node with a next pointing to none is the tail 
 }
 
@@ -41,20 +24,20 @@ struct  Node<T> {
     next: Link<T>, // is an Option wrapped in a box. 
 }
 
-impl<T>LL<T>{
+impl<T>LinkedList<T> {
 
 
 /** make a new list 
- * you will need the list list 
+ * you wiLinkedList need the list list 
  * 
 */
 
     pub fn new_list()-> Self{
  
     // we need to return an empty list containing a head / head contains  a link which has type option so it either contains something or non 
-    LL{ head: None,
+    LinkedList{ head: None,
         tail: None,
-    count: 0 }
+        count: 0 }
     
     }
 
@@ -70,21 +53,21 @@ impl<T>LL<T>{
    
 
 
-        let new_node = Box::new(Node{      // Allocates memory on the heap and then places struct node into it.
+        let new_node = Box::new(Node{      // ALinkedListocates memory on the heap and then places struct node into it.
             // so we receive a 
                 elem: elem,
-            // now the head is still empty
-            // to fill it we want to fill the next
+            // now the head is stiLinkedList empty
+            // to fiLinkedList it we want to fiLinkedList the next
                next: self.head.take(), // take takes the value of head it and put heads on none. this points always to the next value.
         });
-        // now we need to fill the head with the elem we received 
+        // now we need to fiLinkedList the head with the elem we received 
         self.head = Some(new_node);    
 
-        // we need to fill the head with the new elem.
+        // we need to fiLinkedList the head with the new elem.
         
         // we need to link the head to the next node.
         //self.head 
-        // we need to fill the head with the new element
+        // we need to fiLinkedList the head with the new element
 
         // we return the list? 
 
@@ -140,6 +123,9 @@ impl<T>LL<T>{
 //**Inserts an element at the given index. */
 fn insert(&mut self, index:usize, elem:T){
       
+
+
+    //inrelevant
          let len: i32 =  self.count;
          println!{"{:?}", len};
          
@@ -155,12 +141,12 @@ fn insert(&mut self, index:usize, elem:T){
 
    pub fn Pop_front(&mut self)-> Option<T>{
         // first we take the value of the elemt we want so 
-        // we have to take out an element and put all the elemnts in the correct order?
+        // we have to take out an element and put aLinkedList the elemnts in the correct order?
         // need to unwrap here we can use map map unwraps and wraps the results 
         self.count =- 1;
         self.head.take().map(|Node|{
             // so the struct node has two elements 
-            // so we will take the value of what is in the head away therefore we need to replace it with what is in  next
+            // so we wiLinkedList take the value of what is in the head away therefore we need to replace it with what is in  next
             self.head = Node.next;
             // and then we return what is in the elem of the node
             Node.elem
@@ -190,17 +176,17 @@ fn insert(&mut self, index:usize, elem:T){
 
 #[cfg(test)]
 mod tests {
-    use crate::LL; // import the struct 
+    use crate::LinkedList; // import the struct 
     #[test]
     fn basics() {
-    let mut List: LL<i32> = LL::new_list();// make a list.
+    let mut List: LinkedList<i32> = LinkedList::new_list();// make a list.
     
     List.Push_front(3);
     List.Push_front(4);
     assert_eq!(List.Pop_front(), Some(4));
     List.Push_back(5);
 
-    //List.insert(4,4 );
+   // List.insert(4,4 );
    // let len :i32 = List.insert(4,4 );
    // println!{"{:?}", len};
     //assert_eq!(List.Pop_front(), Some(5));
