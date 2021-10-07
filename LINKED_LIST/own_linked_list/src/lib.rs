@@ -23,6 +23,7 @@
 
 pub struct LL<T> {
     head: Link<T>,
+    tail: Link<T>,
     count : i32,
     //tail: Link<T>, i think we dont need it since the node with a next pointing to none is the tail 
 }
@@ -52,6 +53,7 @@ pub fn new_list()-> Self{
  
     // we need to return an empty list containing a head / head contains  a link which has type option so it either contains something or non 
     LL{ head: None,
+        tail: None,
     count: 0 }
     
 }
@@ -75,11 +77,11 @@ pub fn new_list()-> Self{
             // to fill it we want to fill the next
                 next: self.head.take(), // take takes the value of head it and put heads on none. this points always to the next value.
         });
-        // now we need to fill the first elemnt with the elem we received 
+        // now we need to fill the head with the elem we received 
         self.head = Some(new_node);    
 
         // we need to fill the head with the new elem.
-        //self.head = Some(elem);
+        
         // we need to link the head to the next node.
         //self.head 
         // we need to fill the head with the new element
@@ -92,21 +94,25 @@ pub fn new_list()-> Self{
  /*******--------       --------        --------              ------------
   *      |  head  |       |  node 1|       |  node 2 tail |      node 3
   *      --------         ------        --------               -------------
-  */// so we can find the tail if next is == to none then we know we are the end/  
+  */// so we can find the tail if next is == to None  then we know we are the end/  
 
 pub fn Push_back(&mut self, elem:T){
     // needs to be an the end of the lis t
-    let new_node = Box::new(Node{
-        elem: elem, // ok so we have the right element now we need to place it at the back
-        // so first we need to get the node which is last atm and point the next to the new node. 
-        next:None,
-        // oke so now it points to the end of the list 
-    });
+    // let new_node = Box::new(Node{
+    //     elem: elem, // ok so we have the right element now we need to place it at the back
+    //     // so first we need to get the node which is last atm and point the next to the new node. 
+    //     next:None,
+        
+    // });
 
      //= Some(new_node);
     // but what happend with node 2
     //self.next = Some(new_node);
     
+    match self.None{
+
+
+    }
 
 }
 
