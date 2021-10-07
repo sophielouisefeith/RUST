@@ -49,14 +49,14 @@ impl<T>LL<T>{
  * 
 */
 
-pub fn new_list()-> Self{
+    pub fn new_list()-> Self{
  
     // we need to return an empty list containing a head / head contains  a link which has type option so it either contains something or non 
     LL{ head: None,
         tail: None,
     count: 0 }
     
-}
+    }
 
 /**
  * Push
@@ -66,7 +66,7 @@ pub fn new_list()-> Self{
  * make a new node 
  */
 
- pub fn Push_front(&mut self, elem:T ){
+    pub fn Push_front(&mut self, elem:T ){
    
 
 
@@ -88,15 +88,15 @@ pub fn new_list()-> Self{
 
         // we return the list? 
 
-
- }
+        self.count += 1;
+    }
 
  /*******--------       --------        --------              ------------
   *      |  head  |       |  node 1|       |  node 2 tail |      node 3
   *      --------         ------        --------               -------------
   */// so we can find the tail if next is == to None  then we know we are the end/  
 
-pub fn Push_back(&mut self, elem:T){
+    pub fn Push_back(&mut self, elem:T){
     // needs to be an the end of the lis t
     // let new_node = Box::new(Node{
     //     elem: elem, // ok so we have the right element now we need to place it at the back
@@ -114,30 +114,35 @@ pub fn Push_back(&mut self, elem:T){
     //     None => self.Push_front(elem),
     // }
 
-}
+    }
 
 /** Gets the number of elements in the list.
  * we just take the len of the list and return the size 
  * and what if we make a count variable which is updated with every push and pop>? 
  */
-fn len(&self) -> usize{
+//   pub  fn len(&self) -> usize{
 
-    let mut list = &self.head;
-    let mut len = 0;
-  // so i quess to find the len i  need to find the tail from the head and and safe this in a let len;
-    // ref rest 
-    while let Some(ref rest) = *list{
-        len += 1;
-        list = &rest.next;
-    }
-        len
-}
+//     let mut list = &self.head;
+//     let mut len = 0;
+//   // so i quess to find the len i  need to find the tail from the head and and safe this in a let len;
+//     // ref rest 
+//     while let Some(ref rest) = *list{
+//         len += 1;
+//         list = &rest.next;
+//         }
+//         println!{"{:?}", len};
+
+//         len
+        
+//     }
 
 
 //**Inserts an element at the given index. */
 fn insert(&mut self, index:usize, elem:T){
-         // think first need to know the lengt of the linked list 
-         // so i call len 
+      
+         let len: i32 =  self.count;
+         println!{"{:?}", len};
+         
 }
 
  /*
@@ -152,15 +157,16 @@ fn insert(&mut self, index:usize, elem:T){
         // first we take the value of the elemt we want so 
         // we have to take out an element and put all the elemnts in the correct order?
         // need to unwrap here we can use map map unwraps and wraps the results 
+        self.count =- 1;
         self.head.take().map(|Node|{
             // so the struct node has two elements 
             // so we will take the value of what is in the head away therefore we need to replace it with what is in  next
             self.head = Node.next;
             // and then we return what is in the elem of the node
             Node.elem
-
+            
         })
-
+       
    }
 
 
@@ -193,9 +199,15 @@ mod tests {
     List.Push_front(4);
     assert_eq!(List.Pop_front(), Some(4));
     List.Push_back(5);
+
+    //List.insert(4,4 );
+   // let len :i32 = List.insert(4,4 );
+   // println!{"{:?}", len};
     //assert_eq!(List.Pop_front(), Some(5));
     // i want that it can pop from a certain place. 
-
+        
 
     }
 }
+
+
