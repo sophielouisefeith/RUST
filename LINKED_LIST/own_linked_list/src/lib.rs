@@ -6,10 +6,10 @@
 
 pub struct LinkedList<T> {
     head: Link<T>,
-    tail: Link<T>,
+    Tail: Link<T>,
     count : i32, // counts the nodes/ 
-    //tail: Link<T>, i think we dont need it since the node with a next pointing to none is the tail 
-}
+    
+ }
 
 /**  */
 type Link<T> = Option<Box<Node<T>>>;  
@@ -28,7 +28,7 @@ impl<T>LinkedList<T> {
 
 
 /** make a new list 
- * you wiLinkedList need the list list 
+ * 
  * 
 */
 
@@ -36,13 +36,13 @@ impl<T>LinkedList<T> {
  
     // we need to return an empty list containing a head / head contains  a link which has type option so it either contains something or non 
     LinkedList{ head: None,
-        tail: None,
+        Tail: None,
         count: 0 }
     
     }
 
 /**
- * Push
+ * Push front/back 
  * push a new node to the list
  * receives the list, it's going to do something with the list so we need to receive a &mut self -> self == the list 
  * pushes the element to the head list and the head to the next node 
@@ -53,49 +53,83 @@ impl<T>LinkedList<T> {
    
 
 
-        let new_node = Box::new(Node{      // ALinkedListocates memory on the heap and then places struct node into it.
+        let new_node = Box::new(Node{      // box sits on the stack  memory on the heap and then places struct node into it.
             // so we receive a 
                 elem: elem,
             // now the head is stiLinkedList empty
             // to fiLinkedList it we want to fiLinkedList the next
-               next: self.head.take(), // take takes the value of head it and put heads on none. this points always to the next value.
+               next: self.head.take(), // take takes the value of head it and put heads on none. this points always to the next value. put ne
         });
-        // now we need to fiLinkedList the head with the elem we received 
-        self.head = Some(new_node);    
-
-        // we need to fiLinkedList the head with the new elem.
+        // now we need to fiLll the head with the elem we received 
+        self.head = Some(new_node); 
         
-        // we need to link the head to the next node.
-        //self.head 
-        // we need to fiLinkedList the head with the new element
-
-        // we return the list? 
-
         self.count += 1;
     }
 
  /*******--------       --------        --------              ------------
-  *      |  head  |       |  node 1|       |  node 2 tail |      node 3
+  *      |  head o |       |  node 1|       |  node 2 tail |      node 3
   *      --------         ------        --------               -------------
   */// so we can find the tail if next is == to None  then we know we are the end/  
 
     pub fn Push_back(&mut self, elem:T){
-    // needs to be an the end of the lis t
-    // let new_node = Box::new(Node{
-    //     elem: elem, // ok so we have the right element now we need to place it at the back
-    //     // so first we need to get the node which is last atm and point the next to the new node. 
-    //     next:None,
+
+       
+        // go to the last node and fill it's next with the new node.
+        // so i want to be at were next.None and replace this None with the new node,s element right ?
+    
+        let mut curr = &self.head; //node 0
         
-    // });
+        while let Some(next) = curr{   // 
+            
+            curr = &next.next; // value of last node with the reference to the next node
+        }
+       let new_node = Box::new(Node{  
+            elem:elem,
+            next:None,
+        });
+        self.Tail = Some(new_node);
+       
+
+
+       // need to take what is in the 
+      
+        
+        // now we are at the last node. 
+        //elem: T,
+        //next: Link<T>, // is an Option wrapped in a box. 
+
+     
+
+
+
+
+
+        //
+        // while len < self.count {
+
+            
+        //     node.next;
+        //     len += 1;
+
+        // }
+         // what if i safe my tail so i can always go to tail. 
+    // *self = match self{
+    //     Self::None=>  Self::tail{
+    //         Link:
+    //     }
+    // }
+    // needs to be an the end of the lis t
+    //let new_node = Box::new(Node{
+      //  elem: elem, // ok so we have the right element now we need to place it at the back
+        // so first we need to get the node which is last atm and point the next to the new node. 
+      //  next:None,
+        
+   // });
 
      //= Some(new_node);
     // but what happend with node 2
     //self.next = Some(new_node);
-    
-    // match self.tail{
-    //     Some((Node, ref mut child)) => child.push_back(elem),
-    //     None => self.Push_front(elem),
-    // }
+
 
     }
 
@@ -103,8 +137,9 @@ impl<T>LinkedList<T> {
  * we just take the len of the list and return the size 
  * and what if we make a count variable which is updated with every push and pop>? 
  */
-//   pub  fn len(&self) -> usize{
+  pub  fn len(&self) -> i32{
 
+     self.count
 //     let mut list = &self.head;
 //     let mut len = 0;
 //   // so i quess to find the len i  need to find the tail from the head and and safe this in a let len;
@@ -117,22 +152,44 @@ impl<T>LinkedList<T> {
 
 //         len
         
-//     }
+    }
 
 
-//**Inserts an element at the given index. */
-fn insert(&mut self, index:usize, elem:T){
+ /***                                
+  *      |  head 0  |      |  node 1  |        INSERT 2.2           |   node 2.1 tail  |      |    node 3   |
+  *      
+  */
+
+//**Inserts an element at the given index. 
+// tail and head stay the same so looping through the place depending on the size
+//Panics if the index is greater than the length of the list. ? */
+fn insert(&mut self, index:i32, elem:T){
       
 
-
-    //inrelevant
+        // inserting moving all the other nodes to the right
+        //we need push back so first go back to that one. 
          let len: i32 =  self.count;
          println!{"{:?}", len};
+         //assert!(index >= self.count, "index out of bounds" );
+         if self.count <=  index{
+            panic!("Index is > then then lengt of the list ");
+         }
+         
+         let mut curr = &self.head; 
+         let mut i :i32 = index;
+         while i > 0{
+
+            curr = &next.next; 
+            i =- 1;
+            
+         }
+         // make a copy of list 
+        
          
 }
 
  /*
-  * Pop
+  * Pop front/back
   * pop the value of the head from the list
   pop a value fromt  a list, we change the list her so we need to receive again a mut. 
   map: in this case ( option) unwraps  -> needs to return an option -> and wraps the result 
@@ -146,7 +203,7 @@ fn insert(&mut self, index:usize, elem:T){
         self.count =- 1;
         self.head.take().map(|Node|{
             // so the struct node has two elements 
-            // so we wiLinkedList take the value of what is in the head away therefore we need to replace it with what is in  next
+            // so we wiLinkedList take the value of what is in the head away therefore we need to replace it with what is in  next node.
             self.head = Node.next;
             // and then we return what is in the elem of the node
             Node.elem
@@ -156,13 +213,37 @@ fn insert(&mut self, index:usize, elem:T){
    }
 
 
+  
+  fn Pop_back(&mut self) -> Option<T>{
+     
+        self.Tail.take().map(|Node|{
+            self.Tail = Node.next;
+            Node.elem
+        
+    })
+        // self.Tail.take().map(|Node|{
+        // //now we take the last element away so we need to replace it with when next was still some.
+        // Some(next);
+        // Node.elem
+ // })
+  }
+
   /*Peek 
    * peek what is in front of the list.
    */
 
-  pub fn peek(& self)-> Option<&T>{
+  pub fn peek_front(& self)-> Option<&T>{
 
     self.head.as_ref().map(|node|{
+        &node.elem
+
+    })
+    
+}
+
+pub fn peek_back(& self)-> Option<&T>{
+
+    self.Tail.as_ref().map(|node|{
         &node.elem
 
     })
@@ -183,10 +264,12 @@ mod tests {
     
     List.Push_front(3);
     List.Push_front(4);
+    List.Push_back(5);
     assert_eq!(List.Pop_front(), Some(4));
     List.Push_back(5);
-
-   // List.insert(4,4 );
+   // assert_eq!(List.Pop_back(), Some(5));
+    assert_eq!(List.peek_back(), Some(&5));
+    //List.insert(2,2 );
    // let len :i32 = List.insert(4,4 );
    // println!{"{:?}", len};
     //assert_eq!(List.Pop_front(), Some(5));
