@@ -45,26 +45,40 @@ impl<T>LinkedList<T> {
  * Push front/back 
  * push a new node to the list
  * receives the list, it's going to do something with the list so we need to receive a &mut self -> self == the list 
- * pushes the element to the head list and the head to the next node 
+ * pushes the element to the head list and the head to the next node.
  * make a new node 
  */
 
     pub fn Push_front(&mut self, elem:T ){
    
 
-
         let new_node = Box::new(Node{      // box sits on the stack  memory on the heap and then places struct node into it.
-            // so we receive a 
+            //
                 elem: elem,
             // now the head is stiLinkedList empty
             // to fiLinkedList it we want to fiLinkedList the next
-               next: self.head.take(), // take takes the value of head it and put heads on none. this points always to the next value. put ne
+               next: self.head.take(), // next needs to point to the next element in this case head.
         });
-        // now we need to fiLll the head with the elem we received 
+        //fill head with new_node
         self.head = Some(new_node); 
-        
         self.count += 1;
+
+        if self.count == 2
+        //{ self.tail};
+        
     }
+
+
+ pub   fn to_tail(&mut self, it: T){
+        
+        let mut curr = &self.head; //node 0
+        while let Some(next) = curr{   // 
+            
+            curr = &next.next; // value of last node with the reference to the next node
+        } 
+         self.Tail = curr;
+    }
+    
 
  /*******--------       --------        --------              ------------
   *      |  head o |       |  node 1|       |  node 2 tail |      node 3
@@ -131,7 +145,7 @@ impl<T>LinkedList<T> {
     //self.next = Some(new_node);
 
 
-    }
+}
 
 /** Gets the number of elements in the list.
  * we just take the len of the list and return the size 
@@ -163,30 +177,32 @@ impl<T>LinkedList<T> {
 //**Inserts an element at the given index. 
 // tail and head stay the same so looping through the place depending on the size
 //Panics if the index is greater than the length of the list. ? */
-fn insert(&mut self, index:i32, elem:T){
+// fn insert(&mut self, index:i32, elem:T){
       
 
-        // inserting moving all the other nodes to the right
-        //we need push back so first go back to that one. 
-         let len: i32 =  self.count;
-         println!{"{:?}", len};
-         //assert!(index >= self.count, "index out of bounds" );
-         if self.count <=  index{
-            panic!("Index is > then then lengt of the list ");
-         }
-         
-         let mut curr = &self.head; 
-         let mut i :i32 = index;
-         while i > 0{
+//         // inserting moving all the other nodes to the right
+//         //we need push back so first go back to that one. 
+//          let len: i32 =  self.count;
+//          println!{"{:?}", len};
+//          //assert!(index >= self.count, "index out of bounds" );
+//          if self.count <=  index{
+//             panic!("Index is > then then lengt of the list ");
+//          }
+//          //make a loop which goed back to the tail and then loops backwards to the index and then
+//          // add a node to the front 
+//          // then in comes in a loop 
+//          let mut curr = &self.head; 
+//          let mut i :i32 = index;
+//          while i > 0{
 
-            curr = &next.next; 
-            i =- 1;
+//             curr = &next.next; 
+//             i =- 1;
             
-         }
-         // make a copy of list 
+//          }
+//          // make a copy of list 
         
          
-}
+// }
 
  /*
   * Pop front/back
@@ -264,11 +280,15 @@ mod tests {
     
     List.Push_front(3);
     List.Push_front(4);
-    List.Push_back(5);
-    assert_eq!(List.Pop_front(), Some(4));
-    List.Push_back(5);
-   // assert_eq!(List.Pop_back(), Some(5));
+    List.Push_front(5);
     assert_eq!(List.peek_back(), Some(&5));
+    //assert_eq!(List.Pop_back(), Some(&5));
+   // assert_eq!(List.Pop_front(), Some(&5));
+    //List.Push_back(5);
+    //assert_eq!(List.Pop_front(), Some(&4));
+   // List.Push_back(5);
+   // assert_eq!(List.Pop_back(), Some(5));
+   // assert_eq!(List.peek_back(), Some(&5));
     //List.insert(2,2 );
    // let len :i32 = List.insert(4,4 );
    // println!{"{:?}", len};
