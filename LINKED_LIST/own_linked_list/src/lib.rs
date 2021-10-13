@@ -26,8 +26,8 @@ pub struct LinkedList<T> {
 }
 
 /** for itteration */
-pub struct Iter<T>{
-    next: Option<Node<T>>
+pub struct Iter<'a,T>{
+    next: Option <&'a Node<T>>
 }
 
 /** make a struct node which contains an element containing a generic T
@@ -183,16 +183,15 @@ impl<T: std::fmt::Debug> LinkedList<T> {
      */
     pub fn len(&self) -> i32 {
         //self.count
-            let mut list = &self.head;
+            let mut ll = &self.head;
             let mut len = 0;
           // so i quess to find the len i  need to find the tail from the head and and safe this in a let len;
             // ref rest
-            while let Some(ref rest) = *list{
+            while let Some(ref rest) = *ll{ // using ref the value is only borrowed not moved 
                 len += 1;
-                list = &rest.next;
+                ll = &rest.next;
                 }
                 println!{"{:?}", len};
-
                 len
     }
 
@@ -256,20 +255,26 @@ impl<T: std::fmt::Debug> LinkedList<T> {
 
 //fn iter<'a>(&'a self) -> Iter<'a, T>
 // Provides a forward iterator.
-    /* itterate through the list
-    .*/
-impl<T> Iterator for Iter<T>{
+ /* itterate through the list using trait iter 
+.*/
+impl<T>LinkedList<T>
+{
+    pub fn iter(&self) -> Iter<T> {
+        Iter { next: self.head.as_deref() }
+    }
+}
+// iterator is a trait - methods. 
+impl<'a,T> Iterator for Iter<'a,T>{
         
-    type Item = T;
-
+    type Item = &'a T;
+    
+    // next is part of the iterator trait
     fn next(&mut self)-> Option<Self::Item>{
-
-        // loop through the list 
+        // walk through the list // if there is a node we loop returns the next if end none 
         self.next.map(|node|{
-            self.next = node.next;
-            node.elem
-        
-        });
+            self.next = node.next.as_deref(); // converts to target
+            &node.elem
+        })
 
     }
 
@@ -311,8 +316,10 @@ mod tests {
         // List.Push_front(5);
        // List.insert(3,9);
 
-
-
+       List.Push_front(3);
+       List.Push_front(4);
+       let mut iter = List.iter();
+       assert_eq!(iter.next(), Some(&4));
 
 
        // List.Push_back(4);
