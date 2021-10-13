@@ -201,54 +201,108 @@ impl<T: std::fmt::Debug> LinkedList<T> {
 
 
     //fn remove(&mut self, index: usize) -> Option<T>[−]
+
    // Removes the element at the given index. Returns None if the index is out of bounds.
+
             /***
-     *      |  head 0  |      |  node 1  |        INSERT 2.2           |   node 2.1 tail  |      |    node 3   |
+     *      |  head 0  |      |  node 1  |        INSERT 2.2           |   node 2.1  |      |    node 3   |
      *
      */
 
     //**Inserts an element at the given index.
     // tail and head stay the same so looping through the place depending on the size
     // //Panics if the index is greater than the length of the list. ? */
-//     fn insert(&mut self, index:i32, elem:T){
+    fn insert(&mut self, index:i32, elem:T){
       
     
-//         let mut ind = index;
-//        // let mut temp_list = &mut self.head;
-//        // let mut left_list = &mut self.head;
-//         // Check index not > then list. >
-//         if index > self.count{
-//             panic!(" index is bigger then the lengt of the list");
-//         }
+        let mut ind = index;
+        let mut count = self.count;
+       // let mut temp_list = &mut self.head;
+       // let mut left_list = &mut self.head;
+        // Check index not > then list. >
+        if index + 1 > self.count{
+            panic!(" index is bigger then the lengt of the list");
+        }
+        // now check if we have the index tells us that we can just add a node to the front or back
+        // if index == 0{
+        //     // need to push front
+        //     let new_node = Box::new(Node {
+        //             elem,
+        //             next: self.head.take(), 
+        //     });
+        //     self.count += 1;
+        //     self.head = Some(new_node);
+        // }
+        // else if index == self.count{
+        // let mut curr = &mut self.head;   // mut ref to an option
+        
+        // while let Some(node) = curr {
+        //     curr = &mut node.next;
+        // }
+        //         *curr = Some(Box::new(Node { 
+        //             elem, 
+        //             next: None }));
+        //         self.count += 1;
 
-//         self.head.as_ref().map(|node|{  
-//              // walk through the list till indext point
-//              // safe this list in left_list
-//             let mut left_list: &std::boxed::Box<Node<T>>;
-//             while ind > 0 {
-                
-//                 let mut value = node;
-//                 println!("leftlist  {:?}", value);
-//                 ind -= 1;
-//                 println!("leftlist  {:?}", left_list);
-//             }
-            
-//             // swapping the values, but keeping the same references ? so we use map to have a look and return the right element. 
+        // }
 
-//             //println!("RESULT{:?}", left_list);
-//             // loop through the rest of the list till the end 
-//             // safe this in right_list
-//             println!("Total list  {:?}", self.head);
-//             println!("Size list  {:?}", self.count);
-//             self.count = self.count - index;
-//             println!("size right_list  {:?}", self.count);
-//             // same as split_off. 
+        //main value - index die willen we vergelijken met de selfcount en 0 en gelijk
+        let result = match ind{
+        0 => {
+            let new_node = Box::new(Node {
+                elem,
+                next: self.head.take(), 
+            });
+            self.count += 1;
+            self.head = Some(new_node);
+        }
+        count => {  
+        let mut curr = &mut self.head;   // mut ref to an option
+        while let Some(node) = curr {
+            curr = &mut node.next;
+        }
+        *curr = Some(Box::new(Node { 
+            elem, 
+            next: None }));
+            self.count += 1;
+            }
+        };
+        println!("Total list  {:?}", self.head);
+        // if it cant map node is None return None 
+        //self.head.as_ref().map(|node|{ 
             
-//         });
+         //actually just want that the previous is pointing to the value of new node
+         //and that the new node points to value of the next node. 
+
+        // walk through the list till indext point
+        // safe this list in left_list
+    //     let mut left_list: &std::boxed::Box<Node<T>>;
+    //    // let mut value;
+    //     //println!("begin left  {:?}", left_list);
+    //     // fill left list 
+    //         while ind > 1 {
+    //             //value = node;
+    //             left_list = node;
+    //             println!("leftlist  {:?}", left_list);
+    //             ind -= 1;
+    //             //println!("leftlist  {:?}", left_list);
+    //         }
+            
+
+    //         //println!("RESULT{:?}", left_list);
+    //         // walk through the rest of the list till the end 
+    //         // safe this in right_list
+    //         println!("Total list  {:?}", self.head);
+    //         println!("Size list  {:?}", self.count);
+    //         self.count = self.count - index;
+    //         println!("size right_list  {:?}", self.count);
+    //         // same as split_off. 
+            
+    //    // });
         
     
     
-//    }
+   }
 
 
 }
@@ -309,17 +363,18 @@ mod tests {
         // List.Push_back();
         //List.Push_back(2);
         // List.Push_back(3);
-        // List.Push_front(1);
-        // List.Push_front(2);
-        // List.Push_front(3);
-        // List.Push_front(4);
-        // List.Push_front(5);
-       // List.insert(3,9);
+        List.Push_front(1);
+        List.Push_front(2);
+        List.Push_front(3);
+        List.Push_front(4);
+        List.Push_front(5);
+        List.insert(0, 6);
 
-       List.Push_front(3);
-       List.Push_front(4);
-       let mut iter = List.iter();
-       assert_eq!(iter.next(), Some(&4));
+       // it
+    //    let mut iter = List.iter();
+
+    //    assert_eq!(iter.next(), Some(&4));
+    //    assert_eq!(iter.next(), Some(&5));
 
 
        // List.Push_back(4);
