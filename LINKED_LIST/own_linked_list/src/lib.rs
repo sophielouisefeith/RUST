@@ -1,19 +1,35 @@
 /** linked list
  * following https://docs.rs/linked-list/0.0.3/linked_list/struct.LinkedList.html
  * make a new list
- * list contains a head {elem , next} // maybe add a  sep tail
+ * list contains a head {elem , next} // maybe add a  sep tail prev 
  * pop a node to the front
  * pop a node to the back
  * pop a node from the front
  * pop a node from the back
- * insert a node - index
+ * 
+ * --------
+ * insert a node - index 
  * itterate
  */
+
+
+ // tight up my pop and push with tail 
+
+ // insert &mut self, index: usize, elem T  
+ // 1 ->  4 ->  20 
+ // 1 -> 4 -> 11 -> 20
+ // get node index -1     function //pas index -> &mut ref       return the NODE. not the elemnt 
+ // node 1 needs to be filled with next: new_node
+ // store next 
+ // make new_node -> next (20)
+ // node -> 11 new_node
+
 
 extern crate colored; 
 
 use colored::*;
 use colored::*;
+
 
 /** a struct list / generic type
  * the head : wiLinkedList be fiLinkedListed with link of a generic type
@@ -22,13 +38,18 @@ use colored::*;
 #[derive(Debug)]
 pub struct LinkedList<T> {
     head: Option<Box<Node<T>>>,
-    count: i32, // counts the nodes/
+    count: usize, // counts the nodes/
+    // prev: Option<Box<Node<T>>>,
+    //tail
 }
 
 /** for itteration */
 pub struct Iter<'a,T>{
     next: Option <&'a Node<T>>
 }
+
+
+
 
 /** make a struct node which contains an element containing a generic T
  * and and a next which contains the link of a type t
@@ -51,11 +72,13 @@ impl<T: std::fmt::Debug> LinkedList<T> {
         LinkedList {
             head: None,
             count: 0,
+            // prev: None,
+        
         }
     }
 
     /**
-     * Push front/back
+     * push front/back
      * push a new node to the list
      * receives the list, it's going to do something with the list so we need to receive a &mut self -> self == the list
      * create a new node
@@ -63,11 +86,12 @@ impl<T: std::fmt::Debug> LinkedList<T> {
      *
      */
 
-    pub fn Push_front(&mut self, elem: T) {
+    pub fn push_front(&mut self, elem: T) {
         let new_node = Box::new(Node {
             // box sits on the stack  memory on the heap and then places struct node into it.
             elem: elem,
             next: self.head.take(), // next needs to point to the next element in this case head.
+            
         });
         //fill head with new_node
         self.head = Some(new_node);
@@ -78,7 +102,7 @@ impl<T: std::fmt::Debug> LinkedList<T> {
      *      |  head o |       |  node 1 = 4|       |  node 2 tail |      node 3
      *      --------         ------        --------               -------------
      */// so we can find the tail if next is == to None  then we know we are the end/  or do we make a seperate tail
-    pub fn Push_back(&mut self, elem: T) {
+    pub fn push_back(&mut self, elem: T) {
         let mut curr = &mut self.head;   // mut ref to an option
 
         while let Some(node) = curr {
@@ -124,7 +148,7 @@ impl<T: std::fmt::Debug> LinkedList<T> {
         // first we take the value of the elemt we want so
         // we have to take out an element and put aLinkedList the elemnts in the correct order?
         // need to unwrap here we can use map map unwraps and wraps the results
-        self.count = -1;
+        self.count -= 1;
         self.head.take().map(|Node| {
             // so the struct node has two elements
             // so we wiLinkedList take the value of what is in the head away therefore we need to replace it with what is in  next node.
@@ -133,6 +157,8 @@ impl<T: std::fmt::Debug> LinkedList<T> {
             Node.elem
         })
     }
+
+    // you know the tail push front  // just -> 
 
 
     fn Pop_back(&mut self) -> Option<T>{  
@@ -153,8 +179,9 @@ impl<T: std::fmt::Debug> LinkedList<T> {
      */
 
     pub fn peek_front(&self) -> Option<&T> {
-        self.head.as_ref().map(|node| &node.elem);
-        panic!("link list is empty");
+        self.head.as_ref().map(|node| 
+            &node.elem)
+        
     }
 
     /** peek back 
@@ -170,8 +197,8 @@ impl<T: std::fmt::Debug> LinkedList<T> {
                         curr = node;    // node is a ref to a boxed node.
                 }
                 &curr.elem
-            });
-            panic!(" Linked list is empty ");
+            })
+           // panic!(" Linked list is empty ");
            
             
         }
@@ -190,21 +217,190 @@ impl<T: std::fmt::Debug> LinkedList<T> {
             while let Some(ref rest) = *ll{ // using ref the value is only borrowed not moved 
                 len += 1;
                 ll = &rest.next;
+                
                 }
-                println!{"{:?}", len};
+          
                 len
     }
+    
+    // len == usize 
+/**If you allocate memory on the stack you have to return it as value. This includes the Box<_> scenario. 
+ * You return the Box, which has a pointer to heap allocated memory, as value. If you do not allocate memory on the stack you can 
+ * return references to the result which already lives in memory.
+ * In Rust it is efficient to return by value, as the value is moved, not copied. */
+    
+    /*** return the node on the given index 
+    * walk through the nodes when on Node index return.
+    */
+   
+
+    fn get_node(&mut self, index:usize) ->  &mut Node<T>{ 
+        
+
+        let mut ind:usize = index;
+        let mut len:usize = 0;
+        let current = self.head;
+        let &mut curr;
+
+        while len < index{  // after each itteration the value get's dropped.
+            self.head.map(|node|{
+            //let mut curr_node;
+            //match index{
+            if len == index { 
+                curr = &mut Node{ elem: node.elem, next: node.next};
+                }
+                //node.next;
+                //curr;
+            //&mut Node{ elem: curr.elem, next: curr.next};
+            });
+            //curr;
+           // &mut Node{ elem: curr.elem, next: curr.next};
+            len += 1;
+        //}
+        &mut Node{ elem: curr.elem, next: curr.next};
+    }
+
+    
+        //&mut curr; // want to return this
+    
+
+        
+        //&mut Node<T>}
+
+        //let mut ind:usize = index;
+        //let mut len:usize = 0;
+        
+    //walk trough the Nodes.
+        // needs to point to next node 
+        //let mut next_node = next.self.head;
+        //let mut next_node = &mut self.head;
+       // let mut curr_elem;
+      // let &mut curr_node;
+       // self.head.take().map(|node|{
+            // let curr_elem = node.elem;
+            // println!("node next{:?}", node.next);
+            // self.head = node.next;
+            // println!("curr elem {:?}", curr_elem);
+            // let curr_node =   Node{ elem:curr_elem, next:self.head}
+        //});
+        //let elem = self.head.take();
+    //     let &mut curr_node =  &mut Node{ elem, next:self.head.take()}; 
+
+
+    // }
+       
+    //}
+    //     let mut current = self;
+
+    //   let mut curr_node = Node{ elem: self.head, next:self.head.next}; // want to start ad the head fill this with node of head.
+      
+    //   let mut current = self;
+    //     while len < index{
+    //         if len == index{
+    //             curr_node = Node{
+    //             elem: &node.elem,
+    //             next: node //needs to point to the next node in the list 
+    //            };
+    //         }
+    //         else {
+    //             node.next;
+    //         }
+        
+    //     }
+    //    &mut curr_node
+
+    // }
+
+        //     self.head.map(|node|{
+        //     let mut cur_node = Node{
+        //         elem: &node.elem,
+        //         next: None //needs to point to the next node in the list 
+        //     };
+        //     cur_node
+        // });
+    
+        
 
 
 
 
 
+
+
+    //     let mut ind:usize = index;
+    //     let mut len:usize = 0;
+    //     self.head.as_ref().map(|head|{
+    //     let mut curr = head;
+
+        
+    //     self.head.take().map(|Node| {
+    //     //walk trhough the list 
+    //         while let Some(node) = &node.next{
+    //             if len == ind{
+    //             let cur_node = Node{
+    //                 elem : &node.elem,    // value of current node 
+    //                 next: None,   // value of node next.    
+    //                 };
+    //             }
+
+    //         else if len < ind {
+    //             println!{"smaller then{:?}", node.next};
+    //         }
+    //         node.next;
+    //         len += 1;
+    //     }
+    // });
+    //     None
+    
+    // }
+
+
+
+
+
+        // self.head.as_ref().map(|head|{
+
+        //     let mut curr = head;
+        //     while let Some(node) = &curr.next{
+        //         println!("res{:?}", ind);
+        //         println!("len{:?}", len);
+        //         match ind{
+        //             len if len == ind => {
+        //                 println!("len == index");
+        //                 println!("current node {:?}", curr.elem);
+        //                 curr = &node;
+
+        //                 println!("curr{:?}", curr);
+        //             }
+        //             len if len < ind => { 
+        //                 println!("len < index"); 
+        //                 curr = &node;
+        //             }
+        //             _ => panic!("no index"),
+                    
+        //         };
+        //         len += 1;
+        //     }
+        //     println!("current node {:?}", curr.elem);
+
+        // })
+          
+        
+       
+
+
+        
+
+
+
+        // get the index 
+  
 
     //fn remove(&mut self, index: usize) -> Option<T>[−]
 
    // Removes the element at the given index. Returns None if the index is out of bounds.
 
-            /***
+            /*** index 0         1                  2                       3                  4
      *      |  head 0  |      |  node 1  |        INSERT 2.2           |   node 2.1  |      |    node 3   |
      *
      */
@@ -212,41 +408,16 @@ impl<T: std::fmt::Debug> LinkedList<T> {
     //**Inserts an element at the given index.
     // tail and head stay the same so looping through the place depending on the size
     // //Panics if the index is greater than the length of the list. ? */
-    fn insert(&mut self, index:i32, elem:T){
-      
-    
+    fn insert(&mut self, index:usize, elem:T){
+
         let mut ind = index;
         let mut count = self.count;
        // let mut temp_list = &mut self.head;
        // let mut left_list = &mut self.head;
         // Check index not > then list. >
         if index + 1 > self.count{
-            panic!(" index is bigger then the lengt of the list");
+            panic!(" out of bounds ");
         }
-        // now check if we have the index tells us that we can just add a node to the front or back
-        // if index == 0{
-        //     // need to push front
-        //     let new_node = Box::new(Node {
-        //             elem,
-        //             next: self.head.take(), 
-        //     });
-        //     self.count += 1;
-        //     self.head = Some(new_node);
-        // }
-        // else if index == self.count{
-        // let mut curr = &mut self.head;   // mut ref to an option
-        
-        // while let Some(node) = curr {
-        //     curr = &mut node.next;
-        // }
-        //         *curr = Some(Box::new(Node { 
-        //             elem, 
-        //             next: None }));
-        //         self.count += 1;
-
-        // }
-
-        //main value - index die willen we vergelijken met de selfcount en 0 en gelijk
         let result = match ind{
         0 => {
             let new_node = Box::new(Node {
@@ -257,7 +428,7 @@ impl<T: std::fmt::Debug> LinkedList<T> {
             self.head = Some(new_node);
         }
         count => {  
-        let mut curr = &mut self.head;   // mut ref to an option
+        let mut curr = &mut self.head;  
         while let Some(node) = curr {
             curr = &mut node.next;
         }
@@ -267,12 +438,66 @@ impl<T: std::fmt::Debug> LinkedList<T> {
             self.count += 1;
             }
         };
-        println!("Total list  {:?}", self.head);
+    
+    let mut node_1 = self.get_node(index-1);  // return the current node 
+    let node_next = node_1.next; 
+    let insert_node = Node{
+            elem: elem,
+            next: node_next, // this node.next was on the place of the previous // need Node 
+    };
+    node_1 =  &mut Node{ elem:elem, next:Some(Box::new(insert_node))}
+    
+
+      //  println!("current node {:?}", curr);
+
+        // example we have a list of 4  and we want to insert a 5 element on index 2
+        // 
+
+
+         /*** index 0               1                  2                       3                  4
+     *      |  head 0  |      |  node 1  |        node 2.2         |   node 2.1  |      |    node 3   |
+     *
+     */
+       //actually just want that the previous is pointing to the value of new node
+        //and that the new node points to value of the next node. 
+        
         // if it cant map node is None return None 
-        //self.head.as_ref().map(|node|{ 
+       // self.head.as_ref().map(|node|{ 
+
+           // add a new node which points to the node of the index.
+            //and go one back to point that one to the new node
+            // first 
+
+        
+        // step 1 loop to the current node with the index// different way ? 
+        // step 2 place the node in a temp
+        // add the new node pointing 
+        // fill the index node with current 
+        // self.head.map(|head|{  
+        //  // make it mutable cause otherwise it always will points to head. 
+        //     while let Some(node) = &curr.next{  // were walking the list.
+        //         while ind > 1{
+        //             curr = next; 
+        //             println!("left list  {:?}", node);
+        //             ind -= 1;
+        //         }  
+             
+
+                        //curr = node;    // node is a ref to a boxed node.
+                       // &curr.elem
+//              }
+
+//             });
             
-         //actually just want that the previous is pointing to the value of new node
-         //and that the new node points to value of the next node. 
+        
+        
+         }
+ }
+    
+    //})
+
+        
+            // acces the node before the index point it two new node 
 
         // walk through the list till indext point
         // safe this list in left_list
@@ -299,13 +524,9 @@ impl<T: std::fmt::Debug> LinkedList<T> {
     //         // same as split_off. 
             
     //    // });
-        
-    
-    
-   }
+   
 
-
-}
+// iterator is a trait - methods. 
 
 //fn iter<'a>(&'a self) -> Iter<'a, T>
 // Provides a forward iterator.
@@ -327,17 +548,12 @@ impl<'a,T> Iterator for Iter<'a,T>{
         // walk through the list // if there is a node we loop returns the next if end none 
         self.next.map(|node|{
             self.next = node.next.as_deref(); // converts to target
+            //println!{"curr_node{:?}", &node.elem};
             &node.elem
         })
 
     }
 
-       // fn itterate(&self)-> Option<&T>{
-
-        // receive the list and returns an option with value t a reference 
-        // so we again dont do anything with the list we're just looking into it. 
-
-    
 
 }
 
@@ -354,43 +570,98 @@ mod tests {
     use colored::*;
     use colored::*;
     #[test]
-    fn basics() {
+    fn push_pop_peek() {
         let mut List: LinkedList<i32> = LinkedList::new_list(); // make a list.
+        println!("{}",  "TEST push pop  peek ".blue().bold());
 
-        // println!("{}",  "TEST with empty list".blue().bold());
+        // check empty list back
+        assert_eq!(List.Pop_back(), None);
 
-        // println!("{}",  "PUSH BACK".blue().bold());
-        // List.Push_back();
-        //List.Push_back(2);
-        // List.Push_back(3);
-        List.Push_front(1);
-        List.Push_front(2);
-        List.Push_front(3);
-        List.Push_front(4);
-        List.Push_front(5);
-        List.insert(0, 6);
+        // check empty list front 
+        assert_eq!(List.Pop_front(), None);
 
-       // it
-    //    let mut iter = List.iter();
+        // fill list back and front 
+        
+        List.push_front(1);
+        List.push_front(2);
+        List.push_front(3);
+        List.push_front(4);
+        List.push_front(5);
+        List.push_back(6);
+        List.push_back(7);
+        List.push_back(8);
 
-    //    assert_eq!(iter.next(), Some(&4));
-    //    assert_eq!(iter.next(), Some(&5));
+        // peek in the list 
 
 
-       // List.Push_back(4);
-        //List.Push_front(4);
-        //List.Push_back(7);
+        // assert_eq!(List.peek_front(), Some(&5));
+        // assert_eq!(List.peek_back(), Some(&8));
+
+
+    }
+    #[test]
+    fn iter(){
+        println!("{}",  "TEST iter ".blue().bold());
+        let mut List : LinkedList<i32> = LinkedList::new_list();
+
+        // List.push_front(1);
+        // List.push_front(2);
+        // List.push_front(3);
+        // List.push_front(4);
+        // List.push_front(5);
+       
+    
+        println!("print total list {:?}", List);
+    
+        let mut iter = List.iter();
+
+        assert_eq!(iter.next(), None);
+        // assert_eq!(iter.next(), Some(&5));
+        // assert_eq!(iter.next(), Some(&4));
+        
+       //assert_eq!(iter.next(), Some(&5));
+        
+        println!("print total list {:?}", List);
+  }
+
+
+  #[test]
+  fn insert(){
+
+    let mut List : LinkedList<i32> = LinkedList::new_list();
+
+    List.push_front(5);
+    List.push_front(4);    // new node 
+    List.push_front(3);
+    List.push_front(2);
+    List.push_front(1);
+    List.len();
+    List.insert(3,6);
+  }
+
+
+
+      
+
+}
+
+
+
+
+       // List.push_back(4);
+        //List.push_front(4);
+        //List.push_back(7);
         //println!("{}",  "POP BACK".blue().bold());
-       // assert_eq!(List.Pop_back(), Some(7));
-       // List.Push_back(8);
-        //assert_eq!(List.Pop_back(), None);
+        // assert_eq!(List.Pop_back(), Some(7));
+        // List.push_back(8);
+        // assert_eq!(List.Pop_back(), None);
 
         //assert_eq!(List.peek_front(), Some(&7));
         //assert_eq!(List.Pop_back(), Some(&5));
         // assert_eq!(List.Pop_front(), Some(&5));
-        //List.Push_back(5);
+        //List.push_back(5);
         //assert_eq!(List.Pop_front(), Some(&4));
-        // List.Push_back(5);
+        // List.push_back(5);
         // assert_eq!(List.Pop_back(), Some(5));
         // assert_eq!(List.peek_back(), Some(&5));
         //List.insert(2,2 );
@@ -398,8 +669,4 @@ mod tests {
         // println!{"{:?}", len};
         //assert_eq!(List.Pop_front(), Some(5));
         // i want that it can pop from a certain place.
-    }
-}
-
-
    

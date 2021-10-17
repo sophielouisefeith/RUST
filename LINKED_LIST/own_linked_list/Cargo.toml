@@ -2,7 +2,9 @@
 name = "own_linked_list"
 version = "0.1.0"
 edition = "2021"
+term = "*"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+colored = "2"
