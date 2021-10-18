@@ -13,25 +13,6 @@
  */
 
 
- // tight up my pop and push with tail 
-
- // insert &mut self, index: usize, elem T  
- // 1 ->  4 ->  20 
- // 1 -> 4 -> 11 -> 20
- // get node index -1     function //pas index -> &mut ref       return the NODE. not the elemnt 
- // node 1 needs to be filled with next: new_node
- // store next 
- // make new_node -> next (20)
- // node -> 11 new_node
-
-// use core::ptr::NonNull;
-   
-
-// extern crate colored; 
-
-// use colored::*;
-// use colored::*;
-
 
 /** a struct list / generic type
  * the head : wiLinkedList be fiLinkedListed with link of a generic type
@@ -60,34 +41,6 @@ struct Node<T> {
     
 }
 
-// pub struct Cursor<'list, T: 'list> {
-//     current: Option<NonNull<Node<T>>>,
-//     list: &'list LinkedList<T>,
-// }
-
-// pub struct CursorMut<'list, T: 'list> {
-//     current: Option<NonNull<Node<T>>>,
-//     list: &'list mut LinkedList<T>,
-//     current_len: usize,
-// }
-// impl<'list, T> CursorMut<'list, T> {
-
-//     fn next(&self) -> Option<Box<Node<T>>>{
-//         self.current
-//             .map_or(self.list.head, |node| unsafe { node.as_ref().next })
-//     }
-
-//     pub fn current(&mut self) -> Option<&mut T> {
-//         self.current.map(|node| unsafe {
-//             // Need an unbound lifetime to get same lifetime as self
-//             let node = &mut *node.as_ptr();
-//             &mut node.elem
-//         })
-//     }
-
-
-// }
-
 
 /** implement Linkedlist */
 impl<T: std::fmt::Debug> LinkedList<T> {
@@ -98,10 +51,8 @@ impl<T: std::fmt::Debug> LinkedList<T> {
      */
     pub fn new() -> Self {
         LinkedList {
-            head: None,
-            count: 0,
-            // prev: None,
-        
+        head: None,
+        count: 0,     
         }
     }
 
@@ -118,8 +69,7 @@ impl<T: std::fmt::Debug> LinkedList<T> {
         let new_node = Box::new(Node {
             // box sits on the stack  memory on the heap and then places struct node into it.
             elem: elem,
-            next: self.head.take(), // next needs to point to the next element in this case head.
-            
+            next: self.head.take(), // next needs to point to the next element in this case head.  
         });
         //fill head with new_node
         self.head = Some(new_node);
@@ -141,8 +91,6 @@ impl<T: std::fmt::Debug> LinkedList<T> {
             next: None }));
         self.count += 1;
     }
-
-
   
     /*
     * Pop front/back
@@ -204,10 +152,10 @@ impl<T: std::fmt::Debug> LinkedList<T> {
    
 
 
-// pub fn peek_mut(&self)-> Option<&mut T>{
+    pub fn peek_mut(&mut self)-> Option<&mut T>{
 
-//     self.head.as_mut().map
-// }
+        self.head.as_mut().map(|node| &mut node.elem) // unwrap with map and return if some. 
+    }
 
 
     
@@ -230,8 +178,7 @@ impl<T: std::fmt::Debug> LinkedList<T> {
           
                 len
     }
-    
-    // len == usize 
+
 /**If you allocate memory on the stack you have to return it as value. This includes the Box<_> scenario. 
  * You return the Box, which has a pointer to heap allocated memory, as value. If you do not allocate memory on the stack you can 
  * return references to the result which already lives in memory.
@@ -241,16 +188,6 @@ impl<T: std::fmt::Debug> LinkedList<T> {
     * walk through the nodes when on Node index return.
     */
    
-
-    // fn next(&self) -> Option<Box<Node<T>>>{
-
-    //     self.head.map(|node| 
-    //         { 
-    //             node.next
-            
-    //         })
-    // }
-
  
     fn get_node_mut(&mut self, index:usize) -> Option<&mut Box<Node<T>>>{ 
         
@@ -277,28 +214,19 @@ impl<T: std::fmt::Debug> LinkedList<T> {
     // tail and head stay the same so looping through the place depending on the size
     // //Panics if the index is greater than the length of the list. ? */
     pub  fn insert(&mut self, index:usize, elem:T){
-
-
         if index == 0 { 
             self.push_front(elem);
         } else {
-
            let  prev =  self.get_node_mut(index -1) ;
             if let Some(node) = prev{   //if let unwraps 
-
                 let next = node.next.take();  
-                
                 let insert_node = Box::new(Node{
                      elem,
                     next,
                 });
-                
                 node.next  = Some(insert_node);  
-
             }
-
         }
-      
     }
 
 }
