@@ -1,114 +1,11 @@
-# How to learn rust?
+# Rust ....
 
-##### No tutorials .....
-
-Follow:
-
-https://doc.rust-lang.org/rust-by-example/index.html
-
-
-https://doc.rust-lang.org/book/title-page.html
-
-https://medium.com/@rabin_gaire/memory-management-rust-cf65c8465570
-
-https://medium.com/nearprotocol/rust-parallelism-for-non-c-c-developers-ec23f48b7e56
-
-https://betterprogramming.pub/explaining-rusts-modules-420d38eed6c5
-
-https://rcoh.me/posts/rust-linked-list-basically-impossible/
-
-We just simply start with excercises. 
-
-- linkedlist
-list of elements each pointing to the next 
-changing the pointer on the current element setting it on the next element.
-usefull for stack object. 
-or linked list.
-- https://github.com/sophielouisefeith/rustlings
-- https://tomassedovic.github.io/roguelike-tutorial/
-
-
-
-
-TO FIGURE OUT
-
-- [ ] traits
-
-*A trait is a collection of methods.
-- [ ] Iterator trait
-- [ ] Map instead of match 
-- [ ] closure
-- [ ] References and Borrowing 
-    - [ ] Ownership
-    - [ ] Lifetime 
-
-
-
-
-### Iterator trait
-
-
-
-
-
-
-
-## lifetimes ()
-" a lifetime is the name of a region (~block/scope) of code somewhere in a program. That's it. When a reference is tagged with a lifetime, we're saying that it has to be valid for that entire region.
-"
-
-https://medium.com/nearprotocol/understanding-rust-lifetimes-e813bcd405fa
-
-
-- to add something to the back
-using [match](https://doc.rust-lang.org/std/keyword.match.html)
-
-
-OWN MADE QUIZE AND EXCERCISES
-----------------------------------------
-- Match is MUCH more powerful than switch ? why
-write an example.
-
-
-## good resources for linked list
-- https://rust-unofficial.github.io/too-many-lists/second.html
-- https://medium.com/swlh/implementing-a-linked-list-in-rust-c25e460c3676
-LINKED LIST:
-
-
--  Challenge : insert sorted.
-    find the place needs to go and call push front
-- Write pop front and pop back (doubly linked list)
-- doubly linked list why is usin rc = reference count unconvient in some cases. 
-
-
-
-
-Doubly Linked list
--------------------
-- using [weak](https://doc.rust-lang.org/std/rc/struct.Weak.html#method.upgrade)
-
-
-
-Binary tree 
------------------
-
-https://levelup.gitconnected.com/rust-binary-tree-30efdd355b60
-
-
-
-
-LIST:
-------------
-Slices 
-
-
-# Learning rust 
+##### Learning rust 
 
 “Rust is a systems programming language focused on three goals: safety, speed, and concurrency.”
 __ Rust Documentation
 
-## rust is a 
+##### rust is a 
 **A compiled language** 
 
 A compiled language is a programming language whose implementations are typically compilers (translators that generate machine code from source code), and not interpreters (step-by-step executors of source code, where no pre-runtime translation takes place).
@@ -121,6 +18,93 @@ The term is somewhat vague. In principle, any language can be implemented with a
 • rust needs to know for stack alocated things ow much room it will take up.
 • rust always needs to know a value of a given type. value should always be the same size in memory.
 • box size is a heap allocted own pointer. 
+
+
+#####  .....
+
+Follow:
+
+
+
+https://doc.rust-lang.org/rust-by-example/index.html
+
+
+https://doc.rust-lang.org/book/title-page.html
+
+https://www.youtube.com/watch?v=MH00-L6oiI0&list=PLwtLEJr-BkXZ9PmoAlqaFdoj47o61TWrS
+
+https://medium.com/@rabin_gaire/memory-management-rust-cf65c8465570
+
+https://medium.com/nearprotocol/rust-parallelism-for-non-c-c-developers-ec23f48b7e56
+
+https://betterprogramming.pub/explaining-rusts-modules-420d38eed6c5
+
+https://rcoh.me/posts/rust-linked-list-basically-impossible/
+
+https://books.google.nl/books?id=OJwXEAAAQBAJ&pg=PA345&lpg=PA345&dq=what+does+pop+do+in+a+linked+list+rust&source=bl&ots=2gC4yIphJX&sig=ACfU3U3NatY6PuZKQG_vMdOsuXS2MR47Qw&hl=en&sa=X&ved=2ahUKEwiCoKaFjbjzAhWH-KQKHZ1OAvUQ6AF6BAgPEAM#v=onepage&q=what%20does%20pop%20do%20in%20a%20linked%20list%20rust&f=false
+
+
+https://cotigao.medium.com/mutable-reference-in-rust-995320366e22
+
+**BLOCKCHAIN & RUST 
+
+https://www.youtube.com/watch?v=vJdT05zl6jk
+
+ 
+### Why linked list 
+- linkedlist
+list of elements each pointing to the next 
+changing the pointer on the current element setting it on the next element.
+usefull for stack object. 
+or linked list.
+- https://github.com/sophielouisefeith/rustlings
+- https://tomassedovic.github.io/roguelike-tutorial/
+
+
+
+TO FIGURE OUT
+
+- [ ] traits
+
+*A trait is a collection of methods.
+- [ ] Iterator trait
+- [ ] Map instead of match 
+map unwraps returns a wrapped result in case of map option.
+- [ ] closure
+- [ ] References and Borrowing 
+    - [ ] Ownership
+    - [ ] Lifetime 
+
+
+
+
+## Lifetimes ()
+" a lifetime is the name of a region (~block/scope) of code somewhere in a program. That's it. When a reference is tagged with a lifetime, we're saying that it has to be valid for that entire region.
+"
+
+https://medium.com/nearprotocol/understanding-rust-lifetimes-e813bcd405fa
+
+
+- to add something to the back
+using [match](https://doc.rust-lang.org/std/keyword.match.html)
+
+
+
+## Good resources for linked list
+- https://rust-unofficial.github.io/too-many-lists/second.html
+- https://medium.com/swlh/implementing-a-linked-list-in-rust-c25e460c3676
+
+
+Doubly Linked list
+-------------------
+- using [weak](https://doc.rust-lang.org/std/rc/struct.Weak.html#method.upgrade)
+
+
+
+Binary tree 
+-----------------
+
+https://levelup.gitconnected.com/rust-binary-tree-30efdd355b60
 
 
 ## **Resources**
@@ -162,9 +146,6 @@ derive debug:
 
 Enum:
 Enum is an enumurated type 
-
-match
-
 
 println! 
 is not a function, it is a macro. Macros use ! to distinguish them from normal method calls. The documentation contains more information.
